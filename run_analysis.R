@@ -76,7 +76,7 @@ numCols <- ncol(data)-2
 ## Now get the mean for each subject and activity
 tidyData <- aggregate(as.matrix(data[, 1:numCols])~ Subject + ClearActivity, data, mean)
 View(tidyData)
-write.table(tidyData, file = "tidy_data.txt")
+write.table(tidyData, file = "tidy_data.txt", row.name=FALSE)
 
 
 
