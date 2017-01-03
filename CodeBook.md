@@ -6,7 +6,7 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Datas
 A full description is available at the site where the data was obtained:
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 Functionality:
-The script run_analysis.R creates a tidy data set in the following steps:
+The scriptÂ run_analysis.RÂ creates a tidy data set in the following steps:
 1. Merges the training and the test sets to create one data set.
 2. Extracts only the measurements on the mean and standard deviation for each measurement.
 3. Uses descriptive activity names to name the activities in the data set
@@ -35,8 +35,22 @@ tidyData - is the subset of clearly labeled data with the average of each variab
 
 Output
 tidyData.txt
-tidyData.txt contains the tidyData table:
+tidyData.txtÂ contains the tidyData table:
 - column 1 contains the subject IDs, between 1 to 30.
 - column 2 contains the name of the activities.
-- the remaining columns contain the means of each attribute
+- the remaining columns contain the means and standard deviation for each measurement as described below
 
+Throughout the names the following is true:
+1. a 'mean' suffix in the name denotes this is a mean measurement
+2. a 'stdDev' suffix in the name denotes this is a standard deviation measurement
+3. X, Y or Z means the axis the measurement was taken along.
+4. a 'time' prefix means this was taken in the time domain
+5. a 'frequency' prefix means this was taken in the frequency domain.
+6. a 'Jerk' in the name implies that the movement is a sudden one as oppose to a smooth one.
+7. a 'Magnitude' in the name implies that this is the magnitude only measurement and not phase.
+
+The rest of the data column names mean the following, where ... denotes prefix or suffix, as described above:
+1. ... BodyAcceleration-... : this is the body acceleration measurement
+2. ... GravityAcceleration ... : this is the acceleration due to gravity
+3. ... BodyGyroscope ... : This is the gyroscopic measurement of body movement
+ 
