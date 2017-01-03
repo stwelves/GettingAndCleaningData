@@ -38,13 +38,20 @@ View(combinedData)
 ## Add an extra column with V + index added
 features <- read.table("./UCI HAR Dataset/features.txt", header = FALSE)
 features <- mutate(features, name = paste0("V", V1))
+
+## change the column names to something more readable
 meanStdData <- filter(features, grepl("(mean|std)", V2, ignore.case=T)&!grepl("angle", V2))
+meanStdData$V2 <- as.character(meanStdData$V2)
 
 ## Now add activity and subject names so that these can be used to subset the data
 names <- c(meanStdData$name, "Activity", "Subject")
 
 ## Select the relevant data from the data set for std and mean
 stdMeanData <- select(combinedData, one_of(names))
+
+## get the more meaningful names and add them to the columns of data set
+names <- c(meanStdData$V2, "Activity", "Subject")
+colnames(stdMeanData) <- names
 View(stdMeanData)
 
 ## Q3 Use descriptive activity names to name the activities in the data set
@@ -53,7 +60,7 @@ names(activities) <- c("Activity", "ClearActivity")
 
 ## Merge the data with these activities
 ## Then remove the unclear activity label because it isn't needed any longer
-data <- merge(activities, stdMeanData,by = 'Activity', all.x = TRUE)
+data <- merge(stdMeanData, activities,by = 'Activity', all.x = TRUE)
 data <- select(data, -Activity)
 View(data)
 
@@ -77,9 +84,3 @@ numCols <- ncol(data)-2
 tidyData <- aggregate(as.matrix(data[, 1:numCols])~ Subject + ClearActivity, data, mean)
 View(tidyData)
 write.table(tidyData, file = "tidy_data.txt", row.name=FALSE)
-
-
-
-
-
-
