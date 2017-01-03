@@ -53,7 +53,7 @@ names(activities) <- c("Activity", "ClearActivity")
 
 ## Merge the data with these activities
 ## Then remove the unclear activity label because it isn't needed any longer
-data <- merge(stdMeanData, activities,by = 'Activity', all.x = TRUE)
+data <- merge(activities, stdMeanData,by = 'Activity', all.x = TRUE)
 data <- select(data, -Activity)
 View(data)
 
